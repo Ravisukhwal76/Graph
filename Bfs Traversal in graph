@@ -1,0 +1,24 @@
+public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
+        //V -> Number of vertcies
+        
+        ArrayList<Integer> bfs= new ArrayList<>();
+        
+        Queue<Integer> queue = new LinkedList<>();
+        boolean[] visited = new boolean[V];
+        queue.add(0);
+        visited[0] = true;
+        
+        while(!queue.isEmpty()){
+            int curr = queue.poll();
+            bfs.add(curr);
+            
+            for(int val : adj.get(curr)){
+                if(!visited[val]){
+                    queue.add(val);
+                    visited[val]= true;
+                }
+            }
+        }
+        
+        return bfs;
+    }
