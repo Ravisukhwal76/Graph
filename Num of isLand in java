@@ -1,0 +1,62 @@
+
+class Solution {
+    
+    static int numProvinces(ArrayList<ArrayList<Integer>> adj, int V) {
+        
+     ArrayList<ArrayList<Integer>> adjList = new ArrayList<>();
+     
+     for(int i= 0;i<V;i++){
+         adjList.add(i,new ArrayList<Integer>());
+     }    
+     
+     
+     for(int i=0;i<V;i++){
+         for(int j=0;j<V;j++){
+             if(adj.get(i).get(j)==1 && i !=j){
+                 adjList.get(i).add(j);
+                 adjList.get(j).add(i);
+             }
+         }
+     }
+        
+      boolean visited[] = new boolean [V];
+      int count =0;
+      
+      for(int i =0;i<V;i++){
+          if(!visited[i]){
+           count++;
+           bfs(i,visited,adjList);
+          }
+      }
+      
+      return count;
+    }
+
+    // private static void dfs(int i, boolean[] visited, ArrayList<ArrayList<Integer>> adj) {
+    //   visited[i] = true; 
+    //   for(int val: adj.get(i)){
+    //       if(!visited[val]){
+    //           dfs(val,visited,adj);
+    //       }
+    //   }
+       
+    // }
+    
+    
+     private static void bfs(int i, boolean[] visited, ArrayList<ArrayList<Integer>> adj) {
+       
+       Queue<Integer> queue =new LinkedList<>();
+       queue.add(i);
+       visited[i] = true; 
+       while(!queue.isEmpty()){
+           int idx = queue.poll();
+        for(int val: adj.get(idx)){
+           if(!visited[val]){
+               visited[val] = true; 
+                queue.add(val);
+           }
+       }
+       }
+       
+    }
+}
