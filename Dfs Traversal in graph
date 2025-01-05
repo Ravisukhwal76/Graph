@@ -1,0 +1,28 @@
+ public ArrayList<Integer> dfsOfGraph(ArrayList<ArrayList<Integer>> adj) {
+        // Code here
+        int n= adj.size();
+        ArrayList<Integer> res = new ArrayList<>();
+        
+        boolean[] visited = new boolean[n+1];
+        
+        visited[0] = true;
+        dfs(res,visited,0,adj);
+        
+        return res;
+    }
+    
+    private ArrayList<Integer> dfs(ArrayList<Integer> list,boolean[] visited,
+                            int curr,ArrayList<ArrayList<Integer>> adj){
+            
+     list.add(curr);
+     
+     for(int val : adj.get(curr)){
+         if(!visited[val]){
+             visited[val] = true;
+             dfs(list,visited,val,adj);
+         }
+     }
+     
+     return list;
+                            
+    }
